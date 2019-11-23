@@ -43,7 +43,7 @@ object ConfigurationLoader
 							println(opModel)
 							println(opModel("async"))
 							println(opModel("async").boolean)
-							Success(new RunAsync(command, target, !opModel("async").booleanOr(true)))
+							Success(new RunAsync(command, target, !opModel("async").getBoolean))
 						case None => Failure(new ConfigException("'run' must not be empty or null"))
 					}
 				}
