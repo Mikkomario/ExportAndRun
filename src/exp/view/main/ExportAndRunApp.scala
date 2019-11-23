@@ -1,5 +1,7 @@
 package exp.view.main
 
+import utopia.flow.util.FileExtensions._
+import exp.controller.ConfigurationLoader
 import exp.model.ui.{ColorScheme, ColorSet, Margins}
 import utopia.flow.async.ThreadPool
 import utopia.reflection.shape.LengthExtensions._
@@ -25,6 +27,9 @@ object ExportAndRunApp extends App
 {
 	GenesisDataType.setup()
 	
+	// Reads test config
+	val process = ConfigurationLoader("test-data/test-config.json").get
+	
 	// Sets up localization context
 	implicit val defaultLanguageCode: String = "EN"
 	implicit val localizer: Localizer = NoLocalization
@@ -45,7 +50,7 @@ object ExportAndRunApp extends App
 	val actionLoop = new ActorLoop(actorHandler)
 	implicit val context: ExecutionContext = new ThreadPool("ExportAndRun").executionContext
 	
-	val frame = Frame.windowed(new MainVC().view, "Export and Run", User)
+	val frame = Frame.windowed(new MainVC(process).view, "Export and Run", User)
 	frame.setToExitOnClose()
 	
 	actionLoop.registerToStopOnceJVMCloses()

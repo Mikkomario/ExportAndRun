@@ -1,0 +1,14 @@
+{
+  "target_name": "Test",
+  "source_origin": "test-data/source",
+  "target_origin": "test-data/target",
+  "start": [
+    {
+      "update": "hello.txt"
+    },
+    {
+      "run": "cmd /C dir",
+      "async": false
+    }
+  ]
+}

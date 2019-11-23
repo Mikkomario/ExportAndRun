@@ -39,7 +39,11 @@ object ConfigurationLoader
 				{
 					opModel("run").getString.notEmpty match
 					{
-						case Some(command) => Success(new RunAsync(command, target, opModel("asynchronously").booleanOr(true)))
+						case Some(command) =>
+							println(opModel)
+							println(opModel("async"))
+							println(opModel("async").boolean)
+							Success(new RunAsync(command, target, !opModel("async").booleanOr(true)))
 						case None => Failure(new ConfigException("'run' must not be empty or null"))
 					}
 				}
@@ -72,4 +76,12 @@ object ConfigurationLoader
 		case Some(model) => apply(model)
 		case None => Failure(new ConfigException(s"Configuration file $jsonFile doesn't start with a json object"))
 	}}
+	
+	/**
+	 * Reads all .json files directly under specified directory
+	 * @param directory Target directory
+	 * @return Loaded configurations. Failure if file reading, parsing or configuration handling failed
+	 */
+	def readAllFrom(directory: Path) = directory.children.flatMap { _.filter {
+		_.fileType ~== "json" }.tryMap[ExportAndRun, Vector[ExportAndRun]](apply) }
 }

@@ -21,7 +21,7 @@ class UpdateFile(val link: Link) extends Operation
 		if (link.from.exists)
 		{
 			// If target file with same last edited time already exists, doesn't need to update the file
-			if (link.to.exists || link.to.lastModified.toOption.exists { lastUpdated =>
+			if (link.to.exists && link.to.lastModified.toOption.exists { lastUpdated =>
 				link.from.lastModified.toOption.contains(lastUpdated) })
 				Completed()
 			else
