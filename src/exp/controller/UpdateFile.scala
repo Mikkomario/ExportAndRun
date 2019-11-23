@@ -25,7 +25,7 @@ class UpdateFile(val link: Link) extends Operation
 				link.from.lastModified.toOption.contains(lastUpdated) })
 				Completed()
 			else
-				link.to.overwriteWith(link.from) match
+				link.to.createParentDirectories().flatMap { _.overwriteWith(link.from) } match
 				{
 					case Success(_) => Completed()
 					case Failure(exception) => OperationResult.failure(exception.getMessage)

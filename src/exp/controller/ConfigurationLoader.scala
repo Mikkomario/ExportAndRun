@@ -58,6 +58,12 @@ object ConfigurationLoader
 						case None => Failure(new ConfigException("'update' must not be empty or null"))
 					}
 				}
+				else if (opModel.contains("export"))
+				{
+					val from = opModel("export").string.map { source/_ }.getOrElse(source)
+					val to = opModel("to").string.map { target/_ }.getOrElse(target)
+					Success(new Export(Link(from, to)))
+				}
 				else
 					Failure(new ConfigException(s"Unrecognized operation: $opModel"))
 			}
