@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact name="Export and Run -Jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Export_and_Run__Jar</output-path>
+    <root id="root">
+      <element id="archive" name="EXP.jar">
+        <element id="module-output" name="ExportAndRun" />
+        <element id="module-output" name="Utopia-Flow-Scala" />
+        <element id="module-output" name="Utopia-Genesis-Scala" />
+        <element id="module-output" name="Utopia-Inception-Scala" />
+        <element id="module-output" name="Utopia-Reflection" />
+      </element>
+      <element id="library" level="application" name="scala-sdk-2.12.8" />
+    </root>
+  </artifact>
+</component>

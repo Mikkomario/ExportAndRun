@@ -25,7 +25,7 @@ class RunVC(val target: ExportAndRun)(implicit cb: ComponentContextBuilder, lCod
 	private val button =
 	{
 		implicit val headerContext: ComponentContext = cb.result
-		val playImage = Image.readOrEmpty(Paths.get("resources/images/play.png")).withAlpha(0.88)
+		val playImage = Image.readOrEmpty(Paths.get("images/play.png")).withAlpha(0.88)
 		val images = ButtonImageSet(playImage, playImage, playImage * 1.2, playImage.withAlpha(0.55))
 		ImageAndTextButton.contextual(images, s"Run ${target.name}"){ () => execute() }
 	}
