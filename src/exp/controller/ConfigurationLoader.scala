@@ -39,11 +39,7 @@ object ConfigurationLoader
 				{
 					opModel("run").getString.notEmpty match
 					{
-						case Some(command) =>
-							println(opModel)
-							println(opModel("async"))
-							println(opModel("async").boolean)
-							Success(new RunAsync(command, target, !opModel("async").getBoolean))
+						case Some(command) => Success(new RunAsync(command, target, !opModel("async").getBoolean))
 						case None => Failure(new ConfigException("'run' must not be empty or null"))
 					}
 				}
