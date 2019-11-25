@@ -21,8 +21,7 @@ class UpdateFile(val link: Link) extends Operation
 		if (link.from.exists)
 		{
 			// If target file with same last edited time already exists, doesn't need to update the file
-			if (link.to.exists && link.to.lastModified.toOption.exists { lastUpdated =>
-				link.from.lastModified.toOption.contains(lastUpdated) })
+			if (link.to.exists && link.from.hasSameLastModifiedAs(link.to))
 				Completed()
 			else
 				link.to.createParentDirectories().flatMap { _.overwriteWith(link.from) } match
