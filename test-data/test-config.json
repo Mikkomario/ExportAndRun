@@ -5,6 +5,7 @@
   "start": [
     { "update": "hello.txt" },
     { "run": "cmd /C dir" },
-    { "export": "export" }
+    { "export": "export" },
+    { "run": "java -jar RunLocationTest.jar", "async": true }
   ]
 }
